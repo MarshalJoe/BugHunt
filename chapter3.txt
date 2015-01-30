@@ -1,0 +1,59 @@
+# Setting Up Your Environment
+
+## Tool Philosophy
+
+The tools in this guide have been selected because they sit at that rare intersection of essential and free.
+
+Thanks to the explosion of open source software in the last twenty years and its applications in cryptography and web application security, there is a bounty of free software available for the discerning infosec researcher. Although there are certain categories of tools it can be advantageous to pay for (namely, scanners), the majority of freelance security research can be done thriftily, without sacrificing results. Below is an overview of software to consider in your own travels. I've outlined the major programs I will use to perform the **[Attacks](Attacks.md)** walkthroughs in detail here, with an overview of other options under **Other Tools**. You can find even more in the [Additional Resources](AdditionalResources.md) section. 
+
+But first, let's talk about scanners.
+
+## Scanners
+
+Scanners are great. They're also the source of some misdirected angst. Most scanners offer a point-and-click interface, where all the information required to begin a scan is the URL of the domain in question. As a result, they sometimes catch flakk in the security community for being *too* easy to use: Basically, for fostering a sense of misplaced confidence born of putting too much credence in a system that produces a lot of false positives.
+
+The truth is, scanners are a good first step in any pentesting regimen &mdash; identifying any low-hanging fruit in the world of web application vulnerabilities &mdash; but they rarely produce stellar results. They're a good first step precisely because they are so easy to use that there's little opportunity cost in deploying them. But because of that quirk, there's less chance there'll turn up a novel exploit. They also produce a great deal of false positives. Scanners can be useful for their role in sussing out the architecture of the targeted website and ferreting out any glaring security flaws present in the application's attack surface, but they are by no means the ultimate authority in discovering vulnerabilities, and are not necessary to effective pentesting. And of course, it's essential to note, that by bombarding the target application with a barrage of malicious requests, there's always the possibility that a scanner may do real damage to a web application, overloading its servers or corrupting some element of its database &mdash; that's why many companies ban the use of scanners on their site altogether.
+
+A selection of both free open-source and commercial scanners can be found in the [Additional Resouces](AdditionalResources.md) chapter.
+
+Below I've tried to to include of some of the best tools available to pentesters today. all of which exist in a free incarnation.
+
+## Browsers
+The least sexy and most readily available of all pentesting tools, your browser (if it's Chrome or Firefox), has everything necessary to perform a basic assessment of a web app's security profile (or posture). Chrome has over [19 extensions]() for turning your everyday web browsing program into a serious security resource. Firefox, as an open-source application, provides a similar extensibility, and is another great option for those wanting a more lightweight vehicle to conduct their security research.
+
+## Burp Suite
+
+Burp suite, from [Portswigger](), is the gold standard in penetration testing. Available in two varieties, the free community version and a professionally-licensed variety, this Java application comes with a selection of tools made all that more useful for their integration with one another. The results of one Burp tab can be easily sent to another for further analysis (or exploitation) depending on what's required. The difference between the free version and professional one is principally the scanner, which is useful (but again, not necessary). Other limitations exist in the free version, such as request throttling in the Intruder mode and other curbs, but none of them are major, or compromise Burp's status as an extremely useful pentesting tool. The Burp tools included cover a wide variety of functions:
+
+**Proxy**: The proxy sits between you and your browser, and allows you to intercept all the HTTP traffic between you and all the external sites you visit. One of the most foundational and essential tools in the Burp suite, it allows you to completely control your browsing experience. Results from the proxy can be sent to the Intruder or Spider tab for further follow-up.
+
+**Spider**: The Burp Spider function maps the target domain in all its detail, discovering the full sitemap and attack surface of your target. A fantastic exploratory tool, the Spider function is a common first-run in determining a web app's security posture. Best used in conjunction with tools like OWASP's [dirbuster](), a program designed for sniffing out hidden subdomains. 
+
+**Scanner**: Nothing to say here that hasn't been said before: Scanners are great first-wave assaults and can occasionally turn up some easy wins, but don't rely on them to provide the full picture. The relative worth of different commercial scanners is hard to determine, since each will usually turn up different vulnerabilities. It's a good practice, if you're going to incorporate scanners into your security regimen, to use more than one in each security engagement: Their overlapping checks will expose more vlunerabilities than a single one alone. The Burp scanner, it should be noted, is particularly good because it provides a "confidence" rating for each exposed vulnerability &mdash; a fantastic feature in a service prone to false positives.
+
+**Intruder**: Available in both the free and commercial versions, the Intruder tool is one of the most essential weapons in your pentesting armory. Designed to deliver custom-set payloads (malicious or malformed strings designed to allow remote code execution, privilege escalation, and other goodies) to the input fields of a web application, the Intruder is versatile ammunition in your infosec arsenal.
+
+**Repeater**: The repeater is good for repeating actions. It sounds inane, but that's the simplest description available. The repeater saves session tokens and other variables to ensure you can recreate an attack easily and efficiently.
+
+**Sequencer**: Cookies play a major role in the smooth functioning of modern web applications; part of their utility lies in their randomness (and hence, the difficulty in recreating them). The sequencer tool uses mathematical algorithms to determine the randomness of cookies (and their breakability). 
+
+**Extensions**: Part of the genius of Burp lies in its extensibility. Although extensions require Java 7, which is unavailable on certain platforms like older Macbooks, running OS X 10.6.8 and down, they are available to both the free and commercial incarnations of Burp, and provide a grab-bag of extra functionality, including [XSS exploit validation](), [CSRF detection](), and even a free [scanner]().
+
+Setting up Burp Suite is simple. Download the .jar file from the [official Portswigger site](). Then, once you've opened the application, follow these [browser-specific instructions]() for configuring your browser to work with Burp proxy &mdash; the element of the application that allows you to intercept and manually tinker with HTTP requests, a critical feature.
+
+## Kali Linux
+
+Kali linux, an update of the older [Backtrack]() penetration testing platform, is a specialized distribution of the open source Linux operating system designed specifically for security research. Featuring too many tools to list here, it's a fantastic (but fairly advanced) piece of software. I've mostly eschewed it in this tutorial for Burp and browser-based testing tools because they represent less time-intensive and technical setups, while still providing all the necessary functionality.
+
+## Other Tools
+
+
+**Metasploit**: Metasploit is a popular exploitation program, meaning that it usually comes into play *after* you've found a vulnerability and are looking for a way to leverage it to further compromise a web application. Although that's a step beyond what we're interested in covering, it also packs some dynamite vulnerability detection tools (like a scanner) worth checking out.
+
+**Nessus**: Nessus is one of the most respected commercial scanners out there. Although a bit extensive for the average independent freelancer, it has a free trial version if you're interested in checking it out.
+
+**Nexpose**: Another commercial scanner, with a model similar to that of Nessus &mdash; and also worth checking out in its free trial form. Remember that different scanners will rarely produce the same report, so it's useful to combine multiple programs' results for a fuller picture.
+
+**Websecurify**: Websecurify is a great option if you're working from a public computer or on a device (like a Chromebook) that's light on storage. Websecurify is completely in-browser, all it requires is a simple Chrome or Firefox extension, making it one of the least impactful solutions. It's premium version price is in line with that of other commercial scanners, but it does include a free community kit featuring basic proxy and intercept tools.
+
+**SQLmap**: Sqlmap is a command line tool that, like Metasploit, often comes into play after you've already discovered an open vulnerability and are subsequently trying to exploit it (a move pushing you into blackhat territory). But, also like Metasploit, the program contains excellent vulnerability detection capabilities. We will be using it in the [Attacks]() walkthrough to separately confirm the discovery of a SQL injection vulnerability. 

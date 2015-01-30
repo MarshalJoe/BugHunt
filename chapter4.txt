@@ -1,0 +1,51 @@
+# Joining the Hunt
+
+## The Importance of Choosing Your (Legal) Hunting Ground
+
+The tools and strategies outlined in this document are, needless to say, not for every site. One reason is that certain attack strategies, like active scanning, put strain on web servers by bombarding them with a series of malicious scripts and code snippets, then monitoring their responses for evidence of vulnerabilities. The potential for damaging data and crashing the host server are real, which is why even many bug bounty-offering companies forbid active scanning on their sites, or certain sensitive subdomains.
+
+But whether it's from the misguided notion that unexposed vulnerabilities will stay unexposed, or that white-hat hackers can't be entrusted with avoiding damage to sensitive user data, there are other reasons many companies won't allow any sort of probing of their security vulnerabilities, and they will tell you so — with their lawyers.
+
+United States Criminal Code XXXXXXXX INSERT LEGAL INFO HERE
+
+That's why it's so incredibly important to only go through companies that have officially opened their sites to pentesting, and to rigorously adhere to any terms of service or agreements involved with testing their domains. The easiest way of doing this? Going through an intermediary: Bug hunting communities.
+
+## Bug Hunting Communities
+
+Bug hunting communities offer several advantages, including standardized terms of services, shared bug submission templates, and easy payment systems.
+
+They are also, simply put, a convenient source of companies who won't sue your pants off for a ping.
+
+Here are a few of the best bug hunting communities and bug bounty providers, along with a short description of each one and a review of its services. You can find a list of more sites under [Additional Resources](AdditionalResources.md).
+
+[Bugcrowd](https://bugcrowd.com) is a third-party intermediary between sites who are looking to be vetted and independent security contractors willing to do the vetting. There's an easy, sortable directory of companies offering rewards for bounties in the forms of money and reputation points, which are used to select participants for invitation to limited, restricted bug-testing events. The turnaround for payment (depending on the specificity and need for clarification questions) is usually quick and the criteria for being a security researcher consists mostly of having a valid email address.
+
+[Bugsheet](http://www.bugsheet.com/bug-bounties) is more of a directory than an intermediary — they don't accept payment or standardize the terms of service so much as list a directory of sites they've found who participate in bug bounty programs. As such, there's slightly less utility (the process for submitting forms and collecting payment is more fractured), but they also feature a larger list of participating programs to compensate.
+
+[Bugsquid](http://www.bugsquid.com/programs/) is the shortest list of the three. Run by a few Computer Science graduates from Brown University, it only lists a few programs. But as a niche site listing startups, it provides a good pool of vulnerabilities. I must also credit their [learning guide](http://learn.bugsquid.com) as a seminal influence in sparking my interest in further pentest information. Much of its information has been incorporated or covered in some fashion in this book, but it's still worth a look if you're looking for another source of information.
+
+Then of course there's [Google](), [Facebook](), [Twitter](), [Paypal]() and all the other major players who provide large bug bounty programs (see links for their community policies). These sites are subjected to such rigorous testing and vulnerability analysis that I would suggest starting out with smaller targets. That said, they're extensive sites that pay well to protect their user's information: A basic XSS vulnerability, the most common on websites today, will [net you a cool $3,133.7]() if you discover it on a Google property.
+
+## Testing Grounds
+
+In addition to the sites the previous section covered, there are a few *deliberately* vulnerable sites, meant to act as testing grounds for future security professionals, that are great for cutting your teeth on functioning web apps.
+
+[Google's Project Gruyere](https://google-gruyere.appspot.com/) is a great service and probably the best of the deliberately insecure web apps, partially for the fact that it's the only application deployed live, and partially because Google provides an extensive CodeLab walking you through how to exploit each of the included vulnerabilities. Many of the attacks in this book have been tested on Project Gruyere and I encourage you to use it as the practical exercise component for the [Attacks](Attacks.md) section.
+
+[Damn Vulnerable Web App](http://www.dvwa.co.uk/) is another testing ground, slightly more complicated to set up in the fact that it's not already deployed live and requires a local setup. A PHP/MySQL application INSERT MORE INFO HERE
+
+[Firing Range]() is another Google project, this time a "calibrating" app of sorts for scanners primarily geared to detect reflected XSS. That said, it's still a great target for manual methods of vulnerability detection.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
