@@ -4,3 +4,22 @@
 
 ## CSRF
 
+CSRF stands for **C**ross **S**ite **R**equest **F**orgery, and there's a reason that it's second in our list of web application vulnerabilities. CSRF can exist both independently and &mdash; in particularly nasty versions &mdash; in conjunction with XSS. So how does CSRF work?
+
+CRSF, in a nutshell, is when an attacker tricks a victim into executing a malicious request that &mdash; because it originates from the victim's computer, with his or her cookies and authentication credentials &mdash; is accepted by the authenticating server as a valid one.
+
+Let's illustrate this with an example aimed textbook target for hackers everywhere: banks.
+
+Let's say, that, through stored XSS (which, if you'll remember, entails embedding executable javascript code that's slipped past an application's data sanitation censors into areas where other users will unwittingly trip over and execute it. *whew*) a blackhat manages to store this code in some public, and preferably highly trafficked, area of a banking application. I reality, the blackhat could get this link to the victim any number of ways (spear phishing and other social engineering attacks, for example), but the victim clicking on the link has to do so while they're engaged with the (in this case) bank server the attacker is trying to compromise. Embedding XSS to initiate the proper request is such a devious strategy because, if it can be embedded on the page of web application you can make a safe bet that the user will have the proper session cookies on their computer. I'm drawing this example in part from OWASP's [fantastic wiki](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29). This assumes pretty a basic (and flawed) implementation of blacklisting:
+
+`<SCRIPT SRC=http://bank.com/transfer.do?acct=SAMANTHA&amount=100000></SCRIPT>`
+
+In this case, what's really getting executed at the browser level whenever some poor sap navigates to the page where this code lives is:
+
+`GET http://bank.com/transfer.do?acct=YOURACCOUNT&amount=100000`
+
+
+
+
+
+
