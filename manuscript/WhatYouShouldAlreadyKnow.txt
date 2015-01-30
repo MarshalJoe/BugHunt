@@ -1,4 +1,4 @@
-# What You Should Know Already
+# What You Should Already Know
 
 Although it's not necessary to be a professional web developer or security analyst to find bugs, it *is* necessary to have at least a rough acquaintance with a minimum of the following web technologies.
 

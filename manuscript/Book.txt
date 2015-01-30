@@ -1,6 +1,9 @@
-chapter1.txt
-chapter2.txt
-chapter3.txt
-chapter4.txt
-chapter5.txt
-chapter6.txt
+Introduction.txt
+WhatYouShouldAlreadyKnow.txt
+SettingUpYourEnvironment.txt
+JoiningTheHunt.txt
+WebAppSecurityOverview.txt
+Attacks.txt
+SubmittingBugReports.txt
+Conclusion.txt
+AdditionalResources.txt

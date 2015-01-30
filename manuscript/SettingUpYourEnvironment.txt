@@ -19,6 +19,7 @@ A selection of both free open-source and commercial scanners can be found in the
 Below I've tried to to include of some of the best tools available to pentesters today. all of which exist in a free incarnation.
 
 ## Browsers
+
 The least sexy and most readily available of all pentesting tools, your browser (if it's Chrome or Firefox), has everything necessary to perform a basic assessment of a web app's security profile (or posture). Chrome has over [19 extensions]() for turning your everyday web browsing program into a serious security resource. Firefox, as an open-source application, provides a similar extensibility, and is another great option for those wanting a more lightweight vehicle to conduct their security research.
 
 ## Burp Suite
@@ -46,7 +47,6 @@ Setting up Burp Suite is simple. Download the .jar file from the [official Ports
 Kali linux, an update of the older [Backtrack]() penetration testing platform, is a specialized distribution of the open source Linux operating system designed specifically for security research. Featuring too many tools to list here, it's a fantastic (but fairly advanced) piece of software. I've mostly eschewed it in this tutorial for Burp and browser-based testing tools because they represent less time-intensive and technical setups, while still providing all the necessary functionality.
 
 ## Other Tools
-
 
 **Metasploit**: Metasploit is a popular exploitation program, meaning that it usually comes into play *after* you've found a vulnerability and are looking for a way to leverage it to further compromise a web application. Although that's a step beyond what we're interested in covering, it also packs some dynamite vulnerability detection tools (like a scanner) worth checking out.
 

@@ -35,17 +35,3 @@ In addition to the sites the previous section covered, there are a few *delibera
 [Damn Vulnerable Web App](http://www.dvwa.co.uk/) is another testing ground, slightly more complicated to set up in the fact that it's not already deployed live and requires a local setup. A PHP/MySQL application INSERT MORE INFO HERE
 
 [Firing Range]() is another Google project, this time a "calibrating" app of sorts for scanners primarily geared to detect reflected XSS. That said, it's still a great target for manual methods of vulnerability detection.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
