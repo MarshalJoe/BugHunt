@@ -1,2 +1,3 @@
 # Submitting Great Bug Reports
 
+Submitting bug reports is a straightforward task &mdash; but there are still small things you can to give yourself a leg up. Following a basic set of guidelines and avoiding some rookie mistakes will maximize your chances of getting paid the maximum amount in the minimum time.
