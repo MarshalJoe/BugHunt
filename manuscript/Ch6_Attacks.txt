@@ -4,15 +4,15 @@
 
 ## CSRF
 
-CSRF stands for **C**ross **S**ite **R**equest **F**orgery, and there's a reason that it's second in our list of web application vulnerabilities. CSRF can exist both independently and &mdash; in particularly nasty versions &mdash; in conjunction with XSS. So how does CSRF work?
+CSRF stands for **C**ross **S**ite **R**equest **F**orgery, and there's a reason that it's second in our list of web application vulnerabilities. CSRF can exist both independently and, in particularly nasty versions, in conjunction with XSS. But back to CSRF.
 
 CRSF, in a nutshell, is when an attacker tricks a victim into executing a malicious request that &mdash; because it originates from the victim's computer, with his or her cookies and authentication credentials &mdash; is accepted by the authenticating server as a valid one.
 
 Let's illustrate this with an example aimed at a textbook target for hackers everywhere: banks.
 
-Say that a blackhat manages to insert a stored XSS script into some public area of a banking application. In reality, the blackhat could get this link to the victim any number of ways (spear phishing and other social engineering attacks, for example), but the import part is that the victim clicking on the link has to do so while they're engaged with the bank server the attacker is trying to compromise. Embedding XSS to initiate the proper request *can* be an effective strategy because it's a safe bet that the user will have the bank session cookies on their computer if they're baking online at that moment.
+Say that a blackhat manages to insert a stored XSS script into some public area of a banking application. In real attack, the blackhat could get this link to the victim any number of ways (spear phishing and other social engineering attacks, for example), but the important part is that the target of the attack clicking on the link has to do so while they're engaged with the bank server. Embedding XSS to initiate the proper request *can* be an effective strategy because it's a safe bet that the user will have the bank session cookies on their computer if they're baking online at that moment.
 
-Back to the stored XSS. It would probably look something like this:
+Back to the stored XSS. What would it look like? Probably look something like this:
 
 `<SCRIPT SRC=http://bank.com/transfer.do?acct=SUSIE&amount=100000></SCRIPT>`
 
@@ -22,9 +22,8 @@ In this case, what's really getting executed at the browser level whenever the t
 
 Note: The value of the `acct` variable has to match up with the person clicking the link.
 
-So this is where the Cross-Site of Cross-Site Request Forgery comes into play. This request is of course malicious in intent &mdash; it's transferring money Susie most definitely **does not** want to transfer &mdash; but there's a decent shot it'll be honored by the bank's servers. Why? Because of the request's source.
+It's pretty clear what the request is trying to accomplish &mdash; transferring money out of Susie's bank account she most certainly **does not** want transferred.
 
-It all has to do with cookies: if the bank server simply checks for an authentication token
 
 
 
