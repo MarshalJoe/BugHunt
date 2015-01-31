@@ -37,7 +37,7 @@ Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lo
 
 ### Testing for SQLi with SQLmap and Burp Suite 
 
-
+## Fuzzing
 
 
 
