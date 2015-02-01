@@ -4,7 +4,7 @@
 
 The tools in this guide have been selected because they sit at that rare intersection of essential and free.
 
-Thanks to the explosion of open source software in the last twenty years and its applications in cryptography and web application security, there is a bounty of free software available for the discerning infosec researcher. Although there are certain categories of tools it can be advantageous to pay for (namely, scanners), the majority of freelance security research can be done thriftily, without sacrificing results. Below is an overview of software to consider in your own travels. I've outlined the major programs I will use to perform the **[Attacks](Attacks.md)** walkthroughs in detail here, with an overview of other options under **Other Tools**. You can find even more in the [Additional Resources](AdditionalResources.md) section. 
+Thanks to the explosion of open source software in the last twenty years and its applications in cryptography and web application security, there is a bounty of free software available for the discerning infosec researcher. Although there are certain categories of tools it can be advantageous to pay for (namely, scanners), the majority of freelance security research can be done thriftily, without sacrificing results. Below is an overview of software to consider in your own travels. I've outlined the major programs I will use to perform the **[Attacks](Attacks.txt)** walkthroughs in detail here, with an overview of other options under **Other Tools**. You can find even more in the [Additional Resources](AdditionalResources.txt) section. 
 
 But first, let's talk about scanners.
 
@@ -14,7 +14,7 @@ Scanners are great. They're also the source of some misdirected angst. Most scan
 
 The truth is, scanners are a good first step in any pentesting regimen &mdash; identifying any low-hanging fruit in the world of web application vulnerabilities &mdash; but they rarely produce stellar results. They're a good first step precisely because they are so easy to use that there's little opportunity cost in deploying them. But because of that quirk, there's less chance there'll turn up a novel exploit. They also produce a great deal of false positives. Scanners can be useful for their role in sussing out the architecture of the targeted website and ferreting out any glaring security flaws present in the application's attack surface, but they are by no means the ultimate authority in discovering vulnerabilities, and are not necessary to effective pentesting. And of course, it's essential to note, that by bombarding the target application with a barrage of malicious requests, there's always the possibility that a scanner may do real damage to a web application, overloading its servers or corrupting some element of its database &mdash; that's why many companies ban the use of scanners on their site altogether.
 
-A selection of both free open-source and commercial scanners can be found in the [Additional Resouces](AdditionalResources.md) chapter.
+A selection of both free open-source and commercial scanners can be found in the [Additional Resouces](AdditionalResources.txt) chapter.
 
 Below I've tried to to include of some of the best tools available to pentesters today. all of which exist in a free incarnation.
 
@@ -44,7 +44,7 @@ Setting up Burp Suite is simple. Download the .jar file from the [official Ports
 
 ## Kali Linux
 
-Kali linux, an update of the older [Backtrack]() penetration testing platform, is a specialized distribution of the open source Linux operating system designed specifically for security research. Featuring too many tools to list here, it's a fantastic (but fairly advanced) piece of software. I've mostly eschewed it in this tutorial for Burp and browser-based testing tools because they represent less time-intensive and technical setups, while still providing all the necessary functionality.
+Kali linux, an update of the older [Backtrack]() penetration testing platform, is a specialized distribution of the open source Linux operating system designed specifically for security research. Featuring too many tools to list here, it's a fantastic (but fairly advanced) piece of software. I've mostly eschewed it in this tutorial for Burp and browser-based testing tools because they represent more beginner-friendly setups for those without Linux experience, while still providing all the necessary functionality. If you're comfortable with Linux, I encourage checking it out.
 
 ## Other Tools
 
@@ -54,6 +54,6 @@ Kali linux, an update of the older [Backtrack]() penetration testing platform, i
 
 **Nexpose**: Another commercial scanner, with a model similar to that of Nessus &mdash; and also worth checking out in its free trial form. Remember that different scanners will rarely produce the same report, so it's useful to combine multiple programs' results for a fuller picture.
 
-**Websecurify**: Websecurify is a great option if you're working from a public computer or on a device (like a Chromebook) that's light on storage. Websecurify is completely in-browser, all it requires is a simple Chrome or Firefox extension, making it one of the least impactful solutions. It's premium version price is in line with that of other commercial scanners, but it does include a free community kit featuring basic proxy and intercept tools.
+**Websecurify**: Websecurify is a great option if you're working from a public computer or on a device (like a Chromebook) that's light on storage. Websecurify is completely in-browser, so all it requires is a simple Chrome or Firefox extension, making it one of the least impactful solutions. It's premium version price is in line with that of other commercial scanners, but it does include a free community kit featuring basic proxy and intercept tools.
 
-**SQLmap**: Sqlmap is a command line tool that, like Metasploit, often comes into play after you've already discovered an open vulnerability and are subsequently trying to exploit it (a move pushing you into blackhat territory). But, also like Metasploit, the program contains excellent vulnerability detection capabilities. We will be using it in the [Attacks]() walkthrough to separately confirm the discovery of a SQL injection vulnerability. 
+**SQLmap**: Sqlmap is a command line tool that, like Metasploit, often comes into play after you've already discovered an open vulnerability and are subsequently trying to exploit it (a move pushing you into blackhat territory). But, also like Metasploit, the program contains excellent vulnerability detection capabilities. We will be using it in the [Attacks](Attack.txt) walkthrough to separately confirm the discovery of a SQL injection vulnerability. 

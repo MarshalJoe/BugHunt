@@ -2,6 +2,8 @@
 
 ## XSS
 
+### XSS and Burp
+
 ## CSRF
 
 CSRF stands for **C**ross **S**ite **R**equest **F**orgery, and there's a reason that it's second in our list of web application vulnerabilities. CSRF can exist both independently and, in particularly nasty versions, in conjunction with XSS.
@@ -35,9 +37,12 @@ Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lo
 
 ## SQL Injection (SQLi)
 
-### Testing for SQLi with SQLmap and Burp Suite 
 
-## Fuzzing
+
+
+
+
+### Testing for SQLi with SQLmap and Burp Suite
 
 
 
