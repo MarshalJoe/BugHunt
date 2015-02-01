@@ -19,4 +19,4 @@ Web applications are both ubiquitous and growing in number. Social networks, eco
 
 All those services and networked devices will control a large swathe of our lives. Their integrity will be paramount. And as the open source renaissance of the last twenty years has shown us, the best way forward in securing them lies in open, grassroots, and distributed efforts.
 
-Consider this your introduction to productively supporting those efforts. Catching bugs before they can be exploited makes the Internet safer. This tutorial is your guide to actively contributing that safety.
+Consider this your introduction to productively supporting those efforts. Catching bugs before they can be exploited makes the Internet safer. This tutorial is your guide to actively contributing to that safety.
