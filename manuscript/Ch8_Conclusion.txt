@@ -1,2 +1,3 @@
 # Conclusion
 
+I hope this guide has sparked a larger interest in pentesting and given you the tools to keep going on your own. I've tried to offer clear, direct examples of both vulnerability theory and practical code examples.  
