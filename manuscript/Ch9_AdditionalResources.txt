@@ -1,1 +1,11 @@
 # Additional Resources
+
+## Javascript
+
+[JSfiddle](http://jsfiddle.net/) - in-browser javascript execution/testing tool
+
+## SQL
+
+[Schemaverse](https://schemaverse.com/) - command a starship fleet using SQL and battle other players
+[GalaXQL](http://sol.gfxile.net/galaxql.html) - learn SQL by manipulating a Galaxy
+[SQLfiddle](http://sqlfiddle.com/) - in-browser SQL tool similar to JSfiddle

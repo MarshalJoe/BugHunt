@@ -3,3 +3,11 @@
 I hope this guide has sparked a larger interest for you in pentesting and given you the tools you need to continue your studies. This book will keep evolving and growing as I learn (from you!) what examples illustrate the target concepts most clearly and what topics in web application security are the most pertinent for beginners. I also intend to increase the number of attacks covered, provide extra walkthroughs of certain attacks using different tools, and provide more code samples that you can use as part of Burp Suite or other pentesting programs.
 
 As such, I'd love to hear from you. If you have any ideas, suggestions, corrections, or revisions (or you just want to say hi!) reach out to suggestions@bughunting.guide
+
+## Where To Go From Here
+
+So you've read through everything from the security overview to the attacks walkthroughs to how to write and submit a proper bug report, now what?
+
+Get out there and start testing! It's vital to keep honing your skills and working through new strategies with deliberately-vulnerable web apps of the sort we've covered here, but it's also important to get some in-the-field experience. And that doesn't mean just using active scanners! It's important to do manual reconnaisance and testing in order to completely survey an app's vulnerabilities.
+
+If you're looking for sites where you can safely apply your new understanding, try joining one (or all) of the bug hunting communities covered in the **Joining The Hunt** section earlier in the book. And of course, as ever, make sure to read their terms closely before starting any testing.

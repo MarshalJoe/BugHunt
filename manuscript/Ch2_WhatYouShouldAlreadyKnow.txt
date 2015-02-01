@@ -8,47 +8,37 @@ They are, in no particular order:
 * Javascript
 * JSON
 * SQL
-* XML
 * Cookies
 * The Browser
 
-Below are the listed subjects with one or two of what I consider to be the best resources for getting up to speed on them. If you don't feel these resources fit your learning style, want alternative options, or want more advanced (or paid) programs, consult the [Additional Resources](AdditionalResources.md) section.
+Below are the listed subjects with one or two of what I consider to be the best resources for getting up to speed on them. If you don't feel these resources fit your learning style, want alternative options, or want more advanced (or paid) programs, consult the **Additional Resources** section.
 
-## HTTTP
+## HTTP
 
-* SOME RESOURCE
+* [Tuts](http://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
 * SOME RESOURCE
 
 ## Javascript
 
-* [CodeAcademy](http://www.codecademy.com/)
-* [CodeSchool](http://www.codeschool.com)
+* [Code Academy](http://www.codecademy.com/)
+* [Code School](http://www.codeschool.com)
 
 ## JSON
 
-* SOME RESOURCE
-* SOME RESOURCE
+* [W3 Resource](http://www.w3resource.com/JSON/structures.php)
+* [Stackoverflow](http://stackoverflow.com/questions/1695883/what-is-json-can-you-explain-it-to-a-newbie)
 
 ## SQL
 
-* SOME RESOURCE
-* SOME RESOURCE
-
-## XML
-
-* SOME RESOURCE
-* SOME RESOURCE
+* [Learn SQL The Hard Way](http://sql.learncodethehardway.org/)
 
 ## Cookies
 
-* SOME RESOURCE
-* SOME RESOURCE
+* [Good 'ol Wikipedia](http://en.wikipedia.org/wiki/HTTP_cookie)
 
 ## The Browser
 
-* SOME RESOURCE
-* SOME RESOURCE
-* SOME RESOURCE
+* [Official Google Blog](http://googleblog.blogspot.com/2009/10/what-is-browser.html)
 
-There's no defined threshold for how much of each of these subjects you need to understand in order to begin successfully pentesting. One option is to work through the [Attacks](Attacks.txt) section straight through and fill in the gaps as you go, but I'd suggest gaining at least some familiarity with the aforementioned subjects to make your life much easier.
+There's no defined threshold for how much of each of these subjects you need to understand in order to begin successfully pentesting. One option is to work through the **Attacks** section straight through and fill in the gaps as you go, but I'd suggest gaining at least some familiarity with the aforementioned subjects to make your life much easier.
 
