@@ -1,12 +1,19 @@
-# Web App Security Overview
+# Web Application Security Overview
 
-A web app, for the purpose of this guide, is a program stored on a remote server that responds to requests and/or user input via the Internet. It often (but not always) stores data, connects to external services (like APIs), and performs complex calculations or operations.
+A web application, for the purpose of this guide, is a program stored on a remote server that responds to requests and/or user input via the Internet. It often (but not always) stores data, connects to external services (like APIs), and performs complex calculations or operations.
 
 ## The Ubiquity of Web Apps
 
-Driven by computing advances predicted by Moore's Law; their utility; and the availability of tools like frameworks, languages, and educational resources that make building them easier, web applications have come to dominate a substantial portion of the modern web. In fact, just one (albeit a popular one), Netflix, was recently found to account for as much as [9.5% of North American upstream traffic](). That's one popular example common to many people's experiences, but whether it's finance, entertainment, or real estate, applications from search engines to social networks make up a big part of digital life. 
+Driven by an explosion of tools, frameworks, and languages in the last ten years &mdash; especially in the open-source arena &mdash; that have made creating internet-connected software easier, the number of web applications has exploded, along with the ambition of the problems they are attempting to solve. They have become so popular, in fact, that just one (albeit a popular one), Netflix, was recently found to account for as much as [9.5% of North American upstream traffic](http://arstechnica.com/information-technology/2014/11/netflix-takes-up-9-5-of-upstream-traffic-on-the-north-american-internet/) (it also eats up a crazy amount of download bandwidth, too). That's one popular example common to many people's experiences, but whether it's finance, entertainment, or real estate, web applications from search engines to social networks have come to comprise a large part of digital life.
+
+As the number of devices and users connected to the internet increases sharply over the next decade, web applications will become, if possible, more ubiquitous as a way of analyzing and acting upon these large pools of newly-available data. The Internet of Things (IoT) promises many things, but greater security is not one of them. 
 
 ## Intrinsic Security Issues
+
+Web applications, as dynamic pieces of software that input and output vast amounts of data, are naturally vulnerable.
+
+
+
 
 Just as web apps make up a substantial share of the heat shed from the collective servers comprising the Internet, they suffer from security flaws intrinsic to their position as networked programs. These issues can be exploited (by you), but that's for [another chapter](Attacks.md). The most important thing to understand now are the high-level vectors by which web applications can be compromised. The code comes later.
 
@@ -27,19 +34,3 @@ From the perspective of web application developers, all incoming data should be 
 #### The Fragmented Nature of Browsers
 
 Another point of security concern for web applications is the variable nature of the browsers interpreting their data. Technical specs and systems differ substantially across the spectrum of the major players: Chrome (PERCENT), Mozilla Firefox (PERCENT), and Safari (PERCENT).
-
-MORE INFO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
