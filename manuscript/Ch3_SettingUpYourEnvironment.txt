@@ -4,7 +4,7 @@
 
 The tools in this guide have been selected because they sit at that rare intersection of essential and free.
 
-Thanks to the explosion of open source software in the last twenty years and its applications in cryptography and web application security, there is a bounty of free software available for the discerning infosec researcher. Although there are certain categories of tools it can be advantageous to pay for (namely, scanners), the majority of freelance security research can be done thriftily, without sacrificing results. Below is an overview of software to consider in your own travels. I've outlined the major programs I will use to perform the **[Attacks](Attacks.txt)** walkthroughs in detail here, with an overview of other options under **Other Tools**. You can find even more in the [Additional Resources](AdditionalResources.txt) section. 
+Thanks to the explosion of open source software in the last twenty years and its applications in cryptography and web application security, there is a bounty of free software available for the discerning infosec researcher. Although there are certain categories of tools it can be advantageous to pay for (namely, scanners), the majority of freelance security research can be done thriftily, without sacrificing results. Below is an overview of software to consider in your own travels. I've outlined the major programs I will use to perform the **Attacks** walkthroughs in detail here, with an overview of other options under **Other Tools**. You can find even more in the **Additional Resources** section. 
 
 But first, let's talk about scanners.
 
@@ -14,7 +14,7 @@ Scanners are great. They're also the source of some misdirected angst. Most scan
 
 The truth is, scanners are a good first step in any pentesting regimen &mdash; identifying any low-hanging fruit in the world of web application vulnerabilities &mdash; but they rarely produce stellar results. They're a good first step precisely because they are so easy to use that there's little opportunity cost in deploying them. But because of that quirk, there's less chance there'll turn up a novel exploit. They also produce a great deal of false positives. Scanners can be useful for their role in sussing out the architecture of the targeted website and ferreting out any glaring security flaws present in the application's attack surface, but they are by no means the ultimate authority in discovering vulnerabilities, and are not necessary to effective pentesting. And of course, it's essential to note, that by bombarding the target application with a barrage of malicious requests, there's always the possibility that a scanner may do real damage to a web application, overloading its servers or corrupting some element of its database &mdash; that's why many companies ban the use of scanners on their site altogether.
 
-A selection of both free open-source and commercial scanners can be found in the [Additional Resouces](AdditionalResources.txt) chapter.
+A selection of both free open-source and commercial scanners can be found in the **Additional Resouces** chapter.
 
 Below I've tried to to include of some of the best tools available to pentesters today. all of which exist in a free incarnation.
 

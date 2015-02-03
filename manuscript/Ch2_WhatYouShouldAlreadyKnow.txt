@@ -16,7 +16,6 @@ Below are the listed subjects with one or two of what I consider to be the best 
 ## HTTP
 
 * [Tuts](http://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
-* SOME RESOURCE
 
 ## Javascript
 
