@@ -16,6 +16,10 @@ To be clear: **You should always include this information in any bug report**, w
 
 **Attack Surface** refers to the number of areas that accept user input or are otherwise vulnerable because they are public-facing. A social network is an example of a web application that has a large attack surface, since posts, comments, upvotes, etc, all represent ares of app-user interaction.
 
+**Black Box** testing refers to penetration tests and other security exercises that are conducted without any internal information provided from the company or target in question &mdash; nothing is accessible beyond what's normally available to an average user. Black box testing requires isolating the input and output surfaces of a web application and using fuzzing, brute forcing, and other techniques to discover weaknesses detected in the responses.
+
+**White Box** testing refers to the exact opposite (surprise!). During a white box security exercise, the researcher has the same information as the developers working on the application's internal infrastructure &mdash; source code, schema documents, internal server and environment info, etc. White box testing is not covered in this guide, because it assumes you have access to a company's internal information that's simply not available to freelance security researchers.
+
 **Security Posture** is a very fancy way of saying "how vulnerable a web app looks."
 
 **Self-XSS** is a term referring to a certain kind of XSS vulnerability that companies offering bug bounty programs often exclude as being ineligible for a reward. Basically, it works like this:
