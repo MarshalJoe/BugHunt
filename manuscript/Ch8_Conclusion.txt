@@ -10,4 +10,8 @@ So you've read through everything from the security overview to the attacks walk
 
 Get out there and start testing! It's vital to keep honing your skills and working through new strategies with deliberately-vulnerable web apps of the sort we've covered here, but it's also important to get some in-the-field experience. And that doesn't mean just using active scanners! It's important to do manual reconnaisance and testing in order to completely survey an app's vulnerabilities.
 
-If you're looking for sites where you can safely apply your new understanding, try joining one (or all) of the bug hunting communities covered in the **Joining The Hunt** section earlier in the book. And of course, as ever, make sure to read their terms closely before starting any testing.
+If you're looking for sites where you can safely apply your new understanding, try joining one (or all) of the bug hunting communities covered in the **Joining The Hunt** section earlier in the book. And of course, as ever, make sure to read their terms closely before starting any security research.
+
+## Press Inquiries
+
+Please make all media requests to press@bughunging.guide

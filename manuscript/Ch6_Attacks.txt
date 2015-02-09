@@ -31,21 +31,20 @@ These sorts of malicious requests are almost always directed at changing some so
 
 ### Finding CSRF Vulnerabilities with Burp Suite
 
-Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum
-Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum.
 
 ## SQL Injection (SQLi)
 
-SQL stands for **S**tructured **Q**uery **L**anguage and is a programming language used to retrieve information from relational databases. SQL injection (SQLi) is when someone using a web app submits a SQL escape character or script snippet into an input field that is not properly sanitized before being stored in the app's SQL database.
+SQL stands for **S**tructured **Q**uery **L**anguage and is a programming language used to retrieve and store information from relational databases. Wars have been fought over whether the language is pronounced ESS-QUEbobbob SQL injection (SQLi) is when someone using a web app submits a SQL escape character or script snippet into an input field that is not properly sanitized before being stored in the app's SQL database.
 
-Even though they're relatively simple errors to detect and solve, SQL injection vulnerabilities are still very prevalent in the general population of web applications, although their frequency is decreasing.
+Randall Munroe, author of the webcomic [xkcd](http://xkcd.com), probably described it best with this strip:
 
+![xkcd comic](images/xkcd.png) 
 
+Even though they're relatively simple errors to detect and solve, SQL injection vulnerabilities are still very prevalent in the general population of web applications, although their frequency is decreasing. SQL, the cornerstone of the workhorse LAMP hosting environment (**L**inux **A**pache **M**ySQL **P**HP) is still very common, making the number of applications susceptible to this vulnerability a wide swathe of the Internet.
 
+### Testing for SQLi with SQLmap
 
-### Testing for SQLi with SQLmap and Burp Suite
-
-
+The first thing you need to do to test SQLi with SQLmap is *get* SQLmap. The easiest way to install this and all packages (if you're on OS X) is [homebrew](http://brew.sh/) &mdash; a package manage similar to Linux's fantastic `apt-get`
 
 
 

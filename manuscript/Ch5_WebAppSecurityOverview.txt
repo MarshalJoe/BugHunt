@@ -32,8 +32,6 @@ From the perspective of web application developers, all incoming data should be 
 
 #### The Fragmented Nature of Browsers
 
-The main browsers in use today share a remarkable amount of functionality in common. In fact, their (relatively) smooth functioning is a testament to the open-source development of the underlying engines used by, in this case, two of the three most popular browsers in use today (Chrome and Firefox, which share significant portions of essential code). Newer versions of Internet Explorer and the coming Spartan browser being developed by Microsoft have come a long way in erasing the legacy of mind-numbing boilerplate required by the likes of legacy IE installations.
+The main browsers in use today share a remarkable amount of functionality in common. In fact, their (relatively) smooth functioning is a testament to the open-source development of the underlying engines used by, in this case, two of the three most popular browsers in use today (Chrome and Firefox, which share significant portions of essential code). Newer versions of Internet Explorer (IE) and the coming Spartan browser being developed by Microsoft have come a long way in erasing the legacy of mind-numbing boilerplate required by the likes of legacy IE installations.
 
-That said, there's still a lot of old IE out there! And sadly, developers who intend to reach the widest possible audience have to take the sizeable share of legacy browser traffic into account. 
-
-
+But different browsers still interact with web applications differently, meaning (for our purposes) that switching things up can sometimes expose varying parts of a web app's attack surface. It's also fruitful, when you're engaging in a pentesting event, to try attacks while toggling through different browser modes. Disabling javascript, for example, can kill the client-side validation mechanisms some poorly-secured apps use to validate their user input. In this instance, running Burp, Websecurify, or whatever other proxy your using under a browser disallowing javascript may highlight these vulnerabilities.
