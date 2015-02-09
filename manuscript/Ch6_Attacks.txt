@@ -2,7 +2,6 @@
 
 ## XSS
 
-### XSS and Burp
 
 ## CSRF
 
@@ -37,7 +36,9 @@ Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lorem ipsum hipsum gypsum Lo
 
 ## SQL Injection (SQLi)
 
-SQL stands for **S**tructured **Q**uery **L**anguage and is a programming language used to retrieve information from relational databases (but you already knew that, didn't you?). SQL injection (SQLi) is when someone using a web app submits a SQL escape character or script snippet into an input field that is not properly sanitized before being stored in the app's SQL database.
+SQL stands for **S**tructured **Q**uery **L**anguage and is a programming language used to retrieve information from relational databases. SQL injection (SQLi) is when someone using a web app submits a SQL escape character or script snippet into an input field that is not properly sanitized before being stored in the app's SQL database.
+
+Even though they're relatively simple errors to detect and solve, SQL injection vulnerabilities are still very prevalent in the general population of web applications, although their frequency is decreasing.
 
 
 

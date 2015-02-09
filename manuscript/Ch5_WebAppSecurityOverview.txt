@@ -1,36 +1,39 @@
 # Web Application Security Overview
 
-A web application, for the purpose of this guide, is a program stored on a remote server that responds to requests and/or user input via the Internet. It often (but not always) stores data, connects to external services (like APIs), and performs complex calculations or operations.
+A web application, for the purpose of this guide, is a program stored on a server that responds to requests and/or user input via the Internet. It often (but not always) stores data, connects to external services (like APIs), and performs complex calculations or operations.
 
 ## The Ubiquity of Web Apps
 
-Driven by an explosion of tools, frameworks, and languages in the last ten years &mdash; especially in the open-source arena &mdash; that have made creating internet-connected software easier, the number of web applications has exploded, along with the ambition of the problems they are attempting to solve. They have become so popular, in fact, that just one (albeit a popular one), Netflix, was recently found to account for as much as [9.5% of North American upstream traffic](http://arstechnica.com/information-technology/2014/11/netflix-takes-up-9-5-of-upstream-traffic-on-the-north-american-internet/) (it also eats up a crazy amount of download bandwidth, too). That's one popular example common to many people's experiences, but whether it's finance, entertainment, or real estate, web applications from search engines to social networks have come to comprise a large part of digital life.
+Driven by a growing availability and popularity of the tools used to create them, the number of web applications has increased exponentially in recent years. They have become so popular, in fact, that just one, Netflix, was recently found to account for as much as [9.5% of North American upstream traffic](http://arstechnica.com/information-technology/2014/11/netflix-takes-up-9-5-of-upstream-traffic-on-the-north-american-internet/) (coming in as the second biggest consumer of upload bandwidth. The top consumer, if you're curious, is torrent traffic). That's one popular example common to many people's experiences, but whether it's finance, entertainment, or real estate, web applications from search engines to social networks have come to comprise a large part of digital life.
 
-As the number of devices and users connected to the internet increases sharply over the next decade, web applications will become, if possible, more ubiquitous as a way of analyzing and acting upon these large pools of newly-available data. The Internet of Things (IoT) promises many things, but greater security is not one of them. 
+As the number of devices and users connected to the internet increases sharply over the next decade, web applications will become, if possible, more ubiquitous as a way of analyzing and acting upon these large pools of newly-available data. But although the Internet of Things (IoT) promises many things, including new insights harnessed from responsive smart devices, greater security is not one of them. 
 
-## Intrinsic Security Issues
+## Security Issues Intrinsic to Web Applications
 
-Web applications, as dynamic pieces of software that input and output vast amounts of data, are naturally vulnerable.
-
-
-
-
-Just as web apps make up a substantial share of the heat shed from the collective servers comprising the Internet, they suffer from security flaws intrinsic to their position as networked programs. These issues can be exploited (by you), but that's for [another chapter](Attacks.md). The most important thing to understand now are the high-level vectors by which web applications can be compromised. The code comes later.
+Web applications, as dynamic programs that input and output vast amounts of data, are naturally vulnerable to subversion. Below are some of the security issues that are part and parcel of the way web applications operate.
 
 #### Interconnectedness of Services (APIs)
 
-One issue that makes web applications vulnerable is their exposure and/or reliance on APIs.
+The explosion of open-source services in the last decade has created a shared template of languages and frameworks that have in turn given rise to a common set of tools, and an ecosystem built around them. The modularity of [APIs](http://en.wikipedia.org/wiki/Application_programming_interface) allows for unparalleled code sharing and developer productivity, as common application functions (geocoding, SMS relays, transactional emails) are abstracted at the community level into everything from javascript libraries to RESTful APIs.
 
-MORE INFO
+But the pathways to an application necessarily opened by these services can expose web apps to malicious agents. API gateways are an especially prime target because they're often the source of enough traffic to mask attacks. They also often have the ability to access internal data or otherwise make critical state changes inside the app &mdash; an attractive target for malicious users. 
 
 #### The Malice of Users
 
-Web application developers often make the mistake that users won't enter certain commands, or will limit themselves to the direct options made available by the host site's UI, or the constrictions imposed by the browser. This is simply fantasy. Users may enter the wrong type of data, executable code, or any number of varieties of malicious data. They are also liable at times to using programs that circumvent or otherwise short circuit the browser, programs (like Burp Suite!) that I wholeheartedly suggest you use.
+Web application developers often make the mistake that users won't enter certain commands, or will limit themselves to the direct options made available by the host site's UI, or the constrictions imposed by the browser.
 
-A common mistake made in underestimating those conniving, shifty anarchists known as your user base lies in relying on bankrupt concepts like **security through obscurity**. An example of security through obscurity in action would be attaching a click event on a critical button to hide it after activation. There's nothing stopping a (mildly) determined attacker from calling ```$(element).show()``` (showing the element with a jQuery selector), or using a proxy that performs that service on every rendered page (like Burp Proxy), then abusing their hitherto protected button.
+This is simply not the case.
 
-From the perspective of web application developers, all incoming data should be treated as malicious. It's the failure to do so that opens the door for pentest researchers.
+Users may enter the wrong type of data, executable code, or any number of other exotic inputs. They are also liable to using tools that circumvent or otherwise short circuit the browser, programs (like Burp Suite!) that I wholeheartedly suggest you use.
+
+A common mistake is relying on bankrupt concepts like **security through obscurity**. An example of security through obscurity in action would be attaching a click event on a critical button to hide it after activation. There's nothing stopping a (mildly) determined attacker from executing javascript or (in this case) jQuery to the effect of `$(element).show()` or using a proxy that performs that service on every rendered page (like Burp Proxy), then abusing the previously-undetectable button.
+
+From the perspective of web application developers, all incoming data should be treated as malicious. It's difficult in commiting to this philosophy that opens up the door for intrepid pentesting researchers!
 
 #### The Fragmented Nature of Browsers
 
-Another point of security concern for web applications is the variable nature of the browsers interpreting their data. Technical specs and systems differ substantially across the spectrum of the major players: Chrome (PERCENT), Mozilla Firefox (PERCENT), and Safari (PERCENT).
+The main browsers in use today share a remarkable amount of functionality in common. In fact, their (relatively) smooth functioning is a testament to the open-source development of the underlying engines used by, in this case, two of the three most popular browsers in use today (Chrome and Firefox, which share significant portions of essential code). Newer versions of Internet Explorer and the coming Spartan browser being developed by Microsoft have come a long way in erasing the legacy of mind-numbing boilerplate required by the likes of legacy IE installations.
+
+That said, there's still a lot of old IE out there! And sadly, developers who intend to reach the widest possible audience have to take the sizeable share of legacy browser traffic into account. 
+
+
