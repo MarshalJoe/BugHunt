@@ -1,15 +1,28 @@
 # Additional Resources
 
+## General Purpose
+
+[Lynda](http://www.lynda.com/)
+
 ## HTML
 
-
+[HTML Dog](http://htmldog.com/guides/html/beginner/)
+[html.net](http://html.net/)
 
 ## Javascript
 
 [JSfiddle](http://jsfiddle.net/) - in-browser javascript execution/testing tool
+[Javascriptissexy](http://javascriptissexy.com/how-to-learn-javascript-properly/)
+[Learnjs interactive shell](http://www.learn-js.org/)
 
 ## SQL
 
 [Schemaverse](https://schemaverse.com/) - command a starship fleet using SQL and battle other players
 [GalaXQL](http://sol.gfxile.net/galaxql.html) - learn SQL by manipulating a Galaxy
 [SQLfiddle](http://sqlfiddle.com/) - in-browser SQL tool similar to JSfiddle
+
+## Pentesting
+
+[The Hacker Playbook: Practical Guide To Penetration Testing](http://www.amazon.com/The-Hacker-Playbook-Practical-Penetration/dp/1494932636)
+[The Tangled Web: A Guide to Securing Modern Web Applications](http://www.amazon.com/The-Tangled-Web-Securing-Applications/dp/1593273886)
+[FuzzDB](https://code.google.com/p/fuzzdb/) - open-source library of malicious payloads

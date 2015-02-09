@@ -6,8 +6,6 @@ The tools and strategies outlined in this document are, needless to say, not for
 
 But whether it's from the misguided notion that unexposed vulnerabilities will stay unexposed, or that white-hat hackers can't be entrusted with avoiding damage to sensitive user data, there are other reasons many companies won't allow any sort of probing of their security vulnerabilities, and they will tell you so — with their lawyers.
 
-United States Criminal Code XXXXXXXX INSERT LEGAL INFO HERE
-
 That's why it's so incredibly important to only go through companies that have officially opened their sites to pentesting, and to rigorously adhere to any terms of service or agreements involved with testing their domains. The easiest way of doing this? Going through an intermediary: Bug hunting communities.
 
 ## Bug Hunting Communities
@@ -24,7 +22,7 @@ Here are a few of the best bug hunting communities and bug bounty providers, alo
 
 [Bugsquid](http://www.bugsquid.com/programs/) is the shortest list of the three. Run by a few Computer Science graduates from Brown University, it only lists a few programs. But as a niche site listing startups, it provides a good pool of vulnerabilities. I must also credit their [learning guide](http://learn.bugsquid.com) as a seminal influence in sparking my interest in further pentest information. Much of its information has been incorporated or covered in some fashion in this book, but it's still worth a look if you're looking for another source of information.
 
-Then of course there's [Google](), [Facebook](), [Twitter](), [Paypal]() and all the other major players who provide large bug bounty programs (see links for their community policies). These sites are subjected to such rigorous testing and vulnerability analysis that I would suggest starting out with smaller targets. That said, they're extensive sites that pay well to protect their user's information: A basic XSS vulnerability, the most common on websites today, will [net you a cool $3,133.7]() if you discover it on a Google property.
+Then of course there's Google, Facebook, Twitter, Paypal and all the other major players who provide large bug bounty programs (see links for their community policies). These sites are subjected to such rigorous testing and vulnerability analysis that I would suggest starting out with smaller targets.
 
 ## Testing Grounds
 

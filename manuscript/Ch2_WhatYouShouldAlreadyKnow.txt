@@ -5,6 +5,7 @@ Although it's not necessary to be a professional web developer or security analy
 They are, in no particular order:
 
 * HTTP (requests, headers, verbs)
+* HTML
 * Javascript
 * JSON
 * SQL
@@ -16,6 +17,11 @@ Below are the listed subjects with one or two of what I consider to be the best 
 ## HTTP
 
 * [Tuts](http://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
+* [TutorialsPoint](http://www.tutorialspoint.com/http/)
+
+## HTML
+
+* [Mozilla Developer Guide](https://developer.mozilla.org/en-US/Learn/HTML)
 
 ## Javascript
 
@@ -37,7 +43,7 @@ Below are the listed subjects with one or two of what I consider to be the best 
 
 ## The Browser
 
-* [Official Google Blog](http://googleblog.blogspot.com/2009/10/what-is-browser.html)
+* [Official Google Blog Post](http://googleblog.blogspot.com/2009/10/what-is-browser.html)
 
 There's no defined threshold for how much of each of these subjects you need to understand in order to begin successfully pentesting. One option is to work through the **Attacks** section straight through and fill in the gaps as you go, but I'd suggest gaining at least some familiarity with the aforementioned subjects to make your life much easier.
 
