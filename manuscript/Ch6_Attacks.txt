@@ -2,6 +2,131 @@
 
 ## XSS
 
+Cross-site scripting, or XSS (the 'X' stands for cross) is one of the most common vulnerabilities found in websites today. There are a couple different flavors of XSS, but we're going to focus on [Embedded XSS](https://www.owasp.org/index.php/Types_of_Cross-Site_Scripting#Stored_XSS_.28AKA_Persistent_or_Type_I.29) (so called because it entails *embedding* executable code in areas of a web application where other users will stumble across it). [Reflected XSS](https://www.owasp.org/index.php/Types_of_Cross-Site_Scripting#Reflected_XSS_.28AKA_Non-Persistent_or_Type_II.29) is another common variation of XSS and operates on many of the same principles.
+
+First-off, XSS is the real deal. [This guy](http://news.softpedia.com/news/Singapore-Hacker-Jailed-for-XSS-on-Prime-Minister-s-Office-Website-466921.shtml) went to jail for it, albeit in a place not-so-affectionately known as "[Disneyland with the Death penalty](http://archive.wired.com/wired/archive/1.04/gibson.html)". Google will [pay you a cool $3,133.7](http://www.google.com/about/appsecurity/reward-program/) for discovering the bug on a Google site. And to top it all off XSS is, according to [the 2014 Cenzic vulnerability survey](http://www.cenzic.com/downloads/Cenzic_Vulnerability_Report_2014.pdf), the most common vulnerability found in web applications today, discovered in a quarter of all the sites surveyed for the study.
+
+Now because we want to demonstrate this vulnerability in a way that won't incur legal liability for advertising a live exploit, and, also importantly, that will allow you to reproduce it on your own, we're going to use a deliberately vulnerable teaching web app called Google Gruyere.
+
+Before we set up Google Gruyere and began working through our XSS attack though, it's important to first understand an important security safeguard of the modern web &mdash; the very same safeguard we're going to subvert, actually: **The same-origin policy**.
+
+### The Same-Origin Policy
+
+All modern browsers implement some version of the same-origin policy, which is as straightforward as its name implies: Only scripts from pages on the same site may access that site's [DOM](http://www.w3.org/TR/DOM-Level-2-Core/introduction.html) (Document Object Model, a nested, traversible map of a page's HTML elements). The reasoning is also direct: without some version of a same-origin policy, buttons on different sites could affect HTTP requests and DOM changes on other sites, permitting all sorts of malicious behavior.
+
+### Exceptions
+
+But there are exceptions to this rule, as there are to so many. Without it, [Google Fonts](https://www.google.com/fonts), Javascript libraries (e.g. [jQuery](http://jquery.com/), [Mootools](http://mootools.net/), etc.), and other [CDN]()-served static content wouldn't work:
+
+````<link rel="stylesheet" href="http://site.com/style.css"/>````  
+````<script src="https://site.com/script.js"></script>````
+
+Because (using `<script>` as our example) the javascript file being included on the the HTML page with the `<script>` tag must be pulled from the `src`, *then executed*, that means an exception must be made to the same-origin policy to allow for that code (from another site, remember!) to run.
+
+But by allowing `<link>` and `<script>` to bypass the typical conventions of the same-origin policy, serving up content from [CDNs](http://www.webopedia.com/TERM/C/CDN.html) (Content Delivery Networks) to execute on your page, a hole is opened up. A tiny hole, really, but &mdash; like all holes on the internet &mdash; big enough.
+
+That exception makes it possible to execute valid javascript code within those and *other* HTML elements' attributes. The fact that running code in attributes is not limited to `<script>` and `<link>` is a key point. It's also useful to keep in mind that any javascript included executes within the context of the visiting user's browser environment. More about this later. 
+
+Before we get to the actual code, let's take a look at our testing environment.
+
+### Testing with Google Gruyere
+
+[Google Gruyere](http://google-gruyere.appspot.com/) is a wonderful teaching tool and something every infosec hobbyist and early-career web security professional should have on their list of resources. It's a generator that creates sandboxed, live sites with deliberately-introduced vulnerabilities, meant to be exploited in a consequence-free environment, where the software's isolation (and lack of useful data) make it a safe target. The app itself is modeled after a basic social network skeleton, where users with profiles post "snippets" for public consumption.
+
+![Google Gruyere Main Page](images/GG_about.png)
+
+Although the [instructions for setting up your live sandbox](http://google-gruyere.appspot.com/part1) are readily available on the Google Gruyere website, they're simple enough to be easily summarized here:
+
+1. Go to http://google-gruyere.appspot.com/start
+- That's it!
+
+Navigating to that address generates the sandboxed app you can mess around with to your heart's content.
+
+![Google Gruyere App Homepage](images/GG_home.png)
+
+Since the vulnerability we're interested in exploiting relies on posting unsanitized code where it can be executed (unwittingly) by other users, let's go ahead and create an account so that we can create snippets. We'll cover sanitizing code and user-to-user attacks in more detail in a bit.
+
+This is what my screen looks like after logging in with the super-semantic username "SomeGuy."
+
+![Google Gruyere Login](images/GG_login.png)
+
+Next click on the "New Snippet" link, located in the header, which should bring you to this page.
+
+![Google Gruyere New Snippet](images/GG_newSnippet.png)
+
+Aha! There's an important clue here to a possibly fruitful approach. Specifically, the "*Limited HTML is now supported...*" part. But first some greater detail on code sanitation and how it applies to user data.
+
+### Data Sanitation
+
+Those users! Just when you think you can count on them to stick to kitten videos and real estate pyramid scams, they submit code that drops your email registry! The problem of input variability &mdash; the idea that anything open to the public web can and will be subjected to all manner of nasty stuffs &mdash; is a fundamental one in web application security. In order to cope with the reality of malicious user input, developers have created a number of different strategies for retaining the meat of valid posts, while stripping away elements (like escape characters for certain languages) that can prove harmful to either the application or its userbase.
+
+Let's talk about two of the most common methods for sanitizing data (before swinging back to our Google Gruyere XSS attack).
+
+**[Blacklisting](http://en.wikipedia.org/wiki/Blacklist_%28computing%29)** is the process of creating and keeping up-to-date a list of all the sites, scripts, or elements that **are not** allowed to perform a particular action or access certain information on a given site.
+
+**[Whitelisting](http://en.wikipedia.org/wiki/Whitelist)** is the process of creating/keeping current a list of all the sites, scripts, or elements that **are** allowed to perform an action or access information on a site.
+
+Of the two, whitelisting is considered the better security strategy because blacklisting can be so easily circumvented by rejiggering names and other relevant identity markers. With that in mind, let's get to the actual code!
+
+### Code
+
+So how does all this sanitation talk apply to the "New Snippet" form we've opened in our instance of Google Gruyere? Here's the relevant page for a refresher:
+
+![Google Gruyere New Snippet](images/GG_newSnippet.png)
+
+As singled out before, the "*Limited HTML...*" language implies that there is some sanitation going on &mdash; Gruyere is allowing certain HTML markup elements meant to make the text/snippet more readable, but disallowing other ones (I'm looking at you `<script>`). Hence the word "limited." It's unclear whether they're whitelisting or blacklisting, at this point, since the strategies are just inversions of one another.
+
+If you're asking yourself "What HTML elements or tags could be dangerous? If everything was allowed, what's the worst that could happen?" we'll cover that in a little bit, under the **Effects** section. For now, just recognize that being able to embed executable javascript is bad for the site (but a vulnerability for us!)
+
+So let's test the waters a bit. The submission form says "*Limited HTML*," but that could just be a smokescreen,  meant to discourage shenanigans, right? Pretty sneaky, Google Gruyere! Let's start out with the slowest possible pitch:  `<script type="text/javascript">alert('hey!')</script>`
+
+In this case, `alert('hey!')` is a simple canary for testing the browser coalmine: If the alert appears, then the javascript is being executed &mdash; and a whole lot of hijinks are possible.
+
+If we submit that code as a snippet, we get redirected to the following page on Google Gruyere.
+
+![Google Gruyere Initial Submit](images/GG_initialSubmit.png)
+
+No luck! Our alert didn't activiate on submission and (absent any other trigger) will remain inert, harmless text. This was, admittedly, doomed from the start. `<script>` tags are almost always scrubbed from any content because of their clear utility for malicious purposes.
+
+This is where everything about javascript code in certain HTML elements being executable comes into play. `<script>` tags, as stated before, are almost always stripped from any content. But what about code lurking in the `href` or `src` attribute of more innocuous markup?
+
+Let's try another tag. One that might more easily slip past whatever basic sanitation mechanisms Google Gruyere has in place.
+
+Opening another "New Snippet" submission form, enter the following code:
+
+`<a onmouseover="alert('hey!')" href="#">read this!</a>`
+
+`onmouseover` is a typical XSS go-to because it so often slips past sanitation censors. Let's see if it meets with any success here.
+
+Once you've submitted that snippet and been redirected to the main index, mouse over your most recent post. You should see...
+
+![Google Gruyere Success](images/GG_success.png)
+
+Success! Success is most definitely what you should see.
+
+You've now embedded code that can be remotely executed by other users visiting the site and mousing over that particular snippet. That's a vulnerability just waiting to be exploited and a definite headache in the making for whatever webmaster or sysadmin lies on the other side of all those [tubes](http://en.wikipedia.org/wiki/Series_of_tubes).
+
+### Effects
+
+So what's the earth-shattering consequence of being able to create an alert on someone else's window (or execute a snippet of javascript code, as an alert indicates is possible)? It seems annoying but still trivial, on the surface.
+
+Before we discuss it in depth, let's make a quick, (hopefully) illustrative change to the code we just submitted as a snippet. Go ahead and submit the following code as a new snippet.
+
+`<a onmouseover="alert(document.cookie)" href="#">read this too!</a>`
+
+Mousing over this third entry, "read this too!" you should see something like the following:
+
+![Google Gruyere Cookie Alert](images/GG_cookies.png)
+
+This will soon sound all sorts of alarm bells, if it doesn't already. It all comes back to the function cookies serve on the modern web.
+
+Cookies are how websites identify when it's *you* that's returned to that site, as opposed to any of the other thousands &mdash; or millions &mdash; of other individuals bombarding the server with HTTP requests at that moment. Since HTTP is [stateless](http://en.wikipedia.org/wiki/Stateless_protocol) and HTTP requests don't have the ability to access outside information about your identity and security privileges, all that information must be contained *inside each HTTP request*, to be communicated *each time you hit the server*. Cookies are numeric hashes (or in some rare, terrible cases) plaintext variales used by your browser to store that information and communicate it to the server &mdash; allowing you to sign in without logging in, because you've already been authenticated by your cookie.
+
+Are the alarm bells ringing? If cookies authenticate an individual, then if someone else steals that cookie, they can impersonate the person it's tied to &mdash; accessing their account, payment information, and other sensitive details without having to know their username or password!
+
+Since the code `alert(document.cookie)` that we've inserted as a snippet into Google Gruyere is always executed within the context of each individual accessing user's browser environment, it will `alert()` that user's own particular cookie set. All it would take to weaponize this exploit would be to include code initiating an HTTP POST request to the server of your choice with the cookie included along in the parameters. As discussed before, once you have their cookie, you can access someone's account as if you're them. For Google Gruyere, that's not a big deal. For a critical ecommerce platform like Amazon or Ebay... maybe so.
+
+Unfortunately (or perhaps, fortunately), I'll forego covering that code, the last-criminal-mile in setting up a malicious XSS exploit. The more **important point** is that you now know enough to identify XSS bugs in the wild.
 
 ## CSRF
 
@@ -29,7 +154,7 @@ Requests like this are accepted when the authenticating server doesn't have page
 
 These sorts of malicious requests are almost always directed at changing some sort of state as opposed to querying information, because any information accessed will be returned to the *target* and not the attacker. Money changing hands is probably the most common state change effected.
 
-### Finding CSRF Vulnerabilities with Burp Suite
+When checking any web application for CSRF vulnerabilities, it's important to check the web site to see if form requests include some version of a `csrf_token`. These tokens are generated in such a way that they cannot be predicted before hand and indicate unique requests by the validated client browser.
 
 
 ## SQL Injection (SQLi)
@@ -40,14 +165,207 @@ Randall Munroe, author of the webcomic [xkcd](http://xkcd.com), probably describ
 
 ![xkcd comic](images/xkcd.png) 
 
-Even though they're relatively simple errors to detect and solve, SQL injection vulnerabilities are still very prevalent in the general population of web applications, although their frequency is decreasing. SQL, the cornerstone of the workhorse LAMP hosting environment (**L**inux **A**pache **M**ySQL **P**HP) is still very common, making the number of applications susceptible to this vulnerability a wide swathe of the Internet.
+Even though they're relatively simple errors to detect and solve, SQL injection vulnerabilities are still very prevalent in the general population of web applications, although their frequency is decreasing. But SSQL, the cornerstone of the workhorse LAMP hosting environment (**L**inux **A**pache **M**ySQL **P**HP) is still very common, making the number of applications susceptible to this vulnerability a wide swathe of the Internet.
 
 ### Testing for SQLi with SQLmap
 
-The first thing you need to do to test SQLi with SQLmap is *get* SQLmap. The easiest way to install this and all packages (if you're on OS X) is [homebrew](http://brew.sh/) &mdash; a package manage similar to Linux's fantastic `apt-get`
+The first thing you need to do to test SQLi with SQLmap is *get* SQLmap. The easiest way to install this and all packages (if you're on OS X) is [homebrew](http://brew.sh/) &mdash; a package manage similar to Linux's fantastic `apt-get`. If you're on windows, check out [chocolatey](https://chocolatey.org/), a similar project. Although also &mdash; get off windows.
 
+Once you have homebrew, you can install sqlmap with the simple command:
+`brew install sqlmap`
 
+To see the options available to you, enter `sqlmap -h`, which should return the following information:
+````
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -v VERBOSE            Verbosity level: 0-6 (default 1)
 
+  Target:
+    At least one of these options has to be specified to set the source to
+    get target urls from.
 
+    -d DIRECT           Direct connection to the database
+    -u URL, --url=URL   Target url
+    -l LIST             Parse targets from Burp or WebScarab proxy logs
+    -r REQUESTFILE      Load HTTP request from a file
+    -g GOOGLEDORK       Process Google dork results as target urls
+    -c CONFIGFILE       Load options from a configuration INI file
 
+  Request:
+    These options can be used to specify how to connect to the target url.
 
+    --data=DATA         Data string to be sent through POST
+    --cookie=COOKIE     HTTP Cookie header
+    --cookie-urlencode  URL Encode generated cookie injections
+    --drop-set-cookie   Ignore Set-Cookie header from response
+    --user-agent=AGENT  HTTP User-Agent header
+    --random-agent      Use randomly selected HTTP User-Agent header
+    --referer=REFERER   HTTP Referer header
+    --headers=HEADERS   Extra HTTP headers newline separated
+    --auth-type=ATYPE   HTTP authentication type (Basic, Digest or NTLM)
+    --auth-cred=ACRED   HTTP authentication credentials (name:password)
+    --auth-cert=ACERT   HTTP authentication certificate (key_file,cert_file)
+    --proxy=PROXY       Use a HTTP proxy to connect to the target url
+    --proxy-cred=PCRED  HTTP proxy authentication credentials (name:password)
+    --ignore-proxy      Ignore system default HTTP proxy
+    --delay=DELAY       Delay in seconds between each HTTP request
+    --timeout=TIMEOUT   Seconds to wait before timeout connection (default 30)
+    --retries=RETRIES   Retries when the connection timeouts (default 3)
+    --scope=SCOPE       Regexp to filter targets from provided proxy log
+    --safe-url=SAFURL   Url address to visit frequently during testing
+    --safe-freq=SAFREQ  Test requests between two visits to a given safe url
+
+  Optimization:
+    These options can be used to optimize the performance of sqlmap.
+
+    -o                  Turn on all optimization switches
+    --predict-output    Predict common queries output
+    --keep-alive        Use persistent HTTP(s) connections
+    --null-connection   Retrieve page length without actual HTTP response body
+    --threads=THREADS   Max number of concurrent HTTP(s) requests (default 1)
+
+  Injection:
+    These options can be used to specify which parameters to test for,
+    provide custom injection payloads and optional tampering scripts.
+
+    -p TESTPARAMETER    Testable parameter(s)
+    --dbms=DBMS         Force back-end DBMS to this value
+    --os=OS             Force back-end DBMS operating system to this value
+    --prefix=PREFIX     Injection payload prefix string
+    --suffix=SUFFIX     Injection payload suffix string
+    --tamper=TAMPER     Use given script(s) for tampering injection data
+
+  Detection:
+    These options can be used to specify how to parse and compare page
+    content from HTTP responses when using blind SQL injection technique.
+
+    --level=LEVEL       Level of tests to perform (1-5, default 1)
+    --risk=RISK         Risk of tests to perform (0-3, default 1)
+    --string=STRING     String to match in page when the query is valid
+    --regexp=REGEXP     Regexp to match in page when the query is valid
+    --text-only         Compare pages based only on the textual content
+
+  Techniques:
+    These options can be used to tweak testing of specific SQL injection
+    techniques.
+
+    --technique=TECH    SQL injection techniques to test for (default BEUST)
+    --time-sec=TIMESEC  Seconds to delay the DBMS response (default 5)
+    --union-cols=UCOLS  Range of columns to test for UNION query SQL injection
+    --union-char=UCHAR  Character to use for bruteforcing number of columns
+
+  Fingerprint:
+    -f, --fingerprint   Perform an extensive DBMS version fingerprint
+
+  Enumeration:
+    These options can be used to enumerate the back-end database
+    management system information, structure and data contained in the
+    tables. Moreover you can run your own SQL statements.
+
+    -b, --banner        Retrieve DBMS banner
+    --current-user      Retrieve DBMS current user
+    --current-db        Retrieve DBMS current database
+    --is-dba            Detect if the DBMS current user is DBA
+    --users             Enumerate DBMS users
+    --passwords         Enumerate DBMS users password hashes
+    --privileges        Enumerate DBMS users privileges
+    --roles             Enumerate DBMS users roles
+    --dbs               Enumerate DBMS databases
+    --tables            Enumerate DBMS database tables
+    --columns           Enumerate DBMS database table columns
+    --dump              Dump DBMS database table entries
+    --dump-all          Dump all DBMS databases tables entries
+    --search            Search column(s), table(s) and/or database name(s)
+    -D DB               DBMS database to enumerate
+    -T TBL              DBMS database table to enumerate
+    -C COL              DBMS database table column to enumerate
+    -U USER             DBMS user to enumerate
+    --exclude-sysdbs    Exclude DBMS system databases when enumerating tables
+    --start=LIMITSTART  First query output entry to retrieve
+    --stop=LIMITSTOP    Last query output entry to retrieve
+    --first=FIRSTCHAR   First query output word character to retrieve
+    --last=LASTCHAR     Last query output word character to retrieve
+    --sql-query=QUERY   SQL statement to be executed
+    --sql-shell         Prompt for an interactive SQL shell
+
+  Brute force:
+    These options can be used to run brute force checks.
+
+    --common-tables     Check existence of common tables
+    --common-columns    Check existence of common columns
+
+  User-defined function injection:
+    These options can be used to create custom user-defined functions.
+
+    --udf-inject        Inject custom user-defined functions
+    --shared-lib=SHLIB  Local path of the shared library
+
+  File system access:
+    These options can be used to access the back-end database management
+    system underlying file system.
+
+    --file-read=RFILE   Read a file from the back-end DBMS file system
+    --file-write=WFILE  Write a local file on the back-end DBMS file system
+    --file-dest=DFILE   Back-end DBMS absolute filepath to write to
+
+  Operating system access:
+    These options can be used to access the back-end database management
+    system underlying operating system.
+
+    --os-cmd=OSCMD      Execute an operating system command
+    --os-shell          Prompt for an interactive operating system shell
+    --os-pwn            Prompt for an out-of-band shell, meterpreter or VNC
+    --os-smbrelay       One click prompt for an OOB shell, meterpreter or VNC
+    --os-bof            Stored procedure buffer overflow exploitation
+    --priv-esc          Database process' user privilege escalation
+    --msf-path=MSFPATH  Local path where Metasploit Framework 3 is installed
+    --tmp-path=TMPPATH  Remote absolute path of temporary files directory
+
+  Windows registry access:
+    These options can be used to access the back-end database management
+    system Windows registry.
+
+    --reg-read          Read a Windows registry key value
+    --reg-add           Write a Windows registry key value data
+    --reg-del           Delete a Windows registry key value
+    --reg-key=REGKEY    Windows registry key
+    --reg-value=REGVAL  Windows registry key value
+    --reg-data=REGDATA  Windows registry key value data
+    --reg-type=REGTYPE  Windows registry key value type
+
+  General:
+    These options can be used to set some general working parameters.
+
+    -t TRAFFICFILE      Log all HTTP traffic into a textual file
+    -s SESSIONFILE      Save and resume all data retrieved on a session file
+    --flush-session     Flush session file for current target
+    --fresh-queries     Ignores query results stored in session file
+    --eta               Display for each output the estimated time of arrival
+    --update            Update sqlmap
+    --save              Save options on a configuration INI file
+    --batch             Never ask for user input, use the default behaviour
+
+  Miscellaneous:
+    --beep              Alert when sql injection found
+    --check-payload     IDS detection testing of injection payloads
+    --cleanup           Clean up the DBMS by sqlmap specific UDF and tables
+    --forms             Parse and test forms on target url
+    --gpage=GOOGLEPAGE  Use Google dork results from specified page number
+    --page-rank         Display page rank (PR) for Google dork results
+    --parse-errors      Parse DBMS error messages from response pages
+    --replicate         Replicate dumped data into a sqlite3 database
+    --tor               Use default Tor (Vidalia/Privoxy/Polipo) proxy address
+    --wizard            Simple wizard interface for beginner users
+````
+Whoa! That's a lot of information! Thankfully, actually using SQLmap to just detect a SQLi vulnerability isn't that complex. In fact, it takes just one command per instance of form submission.
+
+Let's say your on a website you suspect uses SQL to store the user registry it employs for authentication. You, as a cunning researcher, want to check directly whether that authentication form is susceptible to SQLi aimed at dropping the user registry, escalating user privileges, or otherwise making hash of the website's current security clearance system. If the form you're testing is submitted over a GET request &mdash; that's terrible practice for an authentication system, but common for other input scenarios where SQLi might still be a possibility (why we're covering it) &mdash; then you would employ this sqlmap command:
+
+`sqlmap -u "http://www.site.com/path/to/target.php?user=me&pass=somepass"`
+
+Where the URL is the target of the GET request initiated by the form you're submitting. Note that it doesn't matter what you enter as the values for the input fields you're checking (the `me` and `somepass` parts). If the form is being passed to the server through a POST request (a much more common occurrence), then the command is still startingly simple, requiring only a slight alteration &mdash; the `--data` flag:
+
+`sqlmap --data "user=me&pass=somepass" -u "http://www.site.com/path/to/target.php?"` 
+
+If the sqlmap tools detects a SQLi vulnerability, text will appear confirming the find and prompting further 'takeover' options. Remember not to cause damage to the database of the web application you're testing! Most companies include language in their bug bounty policies placing any legal or financial liability for such damage squarely on the shoulders of the security researcher in question.
