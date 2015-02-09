@@ -15,6 +15,10 @@
 [Javascriptissexy](http://javascriptissexy.com/how-to-learn-javascript-properly/)
 [Learnjs interactive shell](http://www.learn-js.org/)
 
+## Shellcode
+
+[Project Shellcode](http://www.projectshellcode.com/?q=node/12)
+
 ## SQL
 
 [Schemaverse](https://schemaverse.com/) - command a starship fleet using SQL and battle other players
@@ -23,6 +27,10 @@
 
 ## Pentesting
 
+[Red Team Field Manual](http://www.amazon.com/Rtfm-Red-Team-Field-Manual/dp/1494295504/)
 [The Hacker Playbook: Practical Guide To Penetration Testing](http://www.amazon.com/The-Hacker-Playbook-Practical-Penetration/dp/1494932636)
 [The Tangled Web: A Guide to Securing Modern Web Applications](http://www.amazon.com/The-Tangled-Web-Securing-Applications/dp/1593273886)
 [FuzzDB](https://code.google.com/p/fuzzdb/) - open-source library of malicious payloads
+[WebReaver](http://www.webreaver.com/)- OS X scanner
+[SANS Security Training](https://www.sans.org/security-training/)
+[Pentest Standard](http://www.pentest-standard.org/index.php/Main_Page)
