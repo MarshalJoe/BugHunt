@@ -22,7 +22,9 @@ This is a pretty accurate roadmap for the subject of this tutorial. Burp Intrude
 
 The first step in using Burp Intruder is [downloading Burp Suite](http://portswigger.net/burp/download.html). Since Burp is a java app, it's compatible with any OS that can run java (so, all of them). After you've downloaded and started up Burp Suite, follow these [browser-specific instructions](http://portswigger.net/burp/help/suite_gettingstarted.html) on how to configure your browser to run through the Burp proxy.
 
-Before opening Burp, go to everybody's favorite neighborhood deliberately-vulnerable web app, [Google Gruyere](http://google-gruyere.appspot.com/).
+### Google Gruyere
+
+Before opening Burp (or after, if you turn the intercept tab to "off"), go to everybody's favorite neighborhood deliberately-vulnerable web app, [Google Gruyere](http://google-gruyere.appspot.com/).
 
 ![Google Gruyere info](images/GG_about.png)
 
@@ -36,4 +38,48 @@ Click on the "New Snippet" link.
 
 ![Google Gruyere new snippet](images/GG_newSnippet.png)
 
+Enter something that you'll be able to recognize in code &mdash; not "ref=" or something else willfully unsemantic. I've chosen `COOLSTUFF` because I routinely shout nonsense.
 
+![Google Gruyere Cool Stuff](images/GG_coolstuff.png)
+
+### Starting the Attack
+
+Now comes the fun part! Open up Burp and go through the necessary steps to configure your browser (or if you've already done all that and your Intercept tab is set to "off" turn it to "on").
+
+After you've turned the Intercept function of your Burp Proxy app on, go ahead and submit the "New Snippet" Form. It should hang...
+
+...and hang. The Burp Proxy has intercepted the request and won't forward that HTTP traffic until you tell it to. For now, switching back to the Burp window, you should see this in your proxy tab:
+
+![GG Burp Intercept](images/GG_intercept.png)
+
+Now select the action tab...
+
+![GG Burp Proxy Action](images/GG_action.png)
+
+And the "Send to Intruder" option. Navigate over to the Intruder tab and you should see something like this. The highlighted areas are fields where Burp will insert the payloads you specify later.
+
+![GG Burp Intruder](images/GG_intruderInitial.png)
+
+For now, go ahead and click the "clear" button on the right hand side of the window. Then add brackets so that they encapsulate `COOLSTUFF` like so. The "New Snippet" content field is the only input surface we're interested in testing:
+
+![GG Burp Intruder Select](images/GG_intruderSelect.png)
+
+Great! Now switch over to the "payloads" tab. Go to the second field option ("Payload Options [Simple List]"). And add [this](https://code.google.com/p/fuzzdb/source/browse/trunk/attack-payloads/xss/xss-rsnake.txt?r=186), a `.txt` file of common XSS payloads taken from rsnake (all credit and praise to him). Afterwards your screen should look like this. Go ahead and uncheck the box to encode your payload for HTTP submission.
+
+![GG Burp load payload](images/GG_loadPayload.png)
+
+One more step! Go to the Intruder tab at the tob of Burp and select the first option "start attack." You'll get some text about how the free version of Burp suite is throttled, etc, etc. Click 'yes.' The window that pops up will contain the results of your attack.
+
+### Interpreting the Results
+
+Something along these lines should pop up in your attack window.
+
+![GG Burp attack results](images/GG_attackResults.png)
+
+There are several ways we can interpret the results and discern XSS hits and misses.
+
+The first (and most direct) is noting the baseline request's time and how much, if at all, the times of subsequent payloads stray from it. The extended length of the request &mdash; in this instance almost three times the length of the baseline &mdash; definitely means those scripts are suspicious and worth confirming manually.
+
+Another clue that the requests coming in way past the baseline are suspect, albeit one peculiar to this application, is that one of the first submission's in rsnake's list is a plain `<script>` tag that happens to return a plain 'ol, saintly `540` as the request time, the same as the baseline &mdash; as we discovered in our [last post](http://bughunting.guide/a-gentle-introduction-to-cross-site-scripting-xss/).
+
+Another option is using XSS Validator, A Burp Suite extension available to both free and premium users that uses a Phantomjs server to send cross-site requests confirming legitimate vulnerabilities &mdash; and disproving false positives. I hope to have a blog post about XSS Validator soon.  

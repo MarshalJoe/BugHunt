@@ -128,6 +128,93 @@ Since the code `alert(document.cookie)` that we've inserted as a snippet into Go
 
 Unfortunately (or perhaps, fortunately), I'll forego covering that code, the last-criminal-mile in setting up a malicious XSS exploit. The more **important point** is that you now know enough to identify XSS bugs in the wild.
 
+### Delivering XSS Payloads with Burp Intruder
+
+Previously, I showed you how to detect XSS vulnerabilities the good 'old fashioned way &mdash; by directly submitting a series of increasingly obfuscated variations of the `alert(0)` classic.
+
+That's a somewhat primitive approach and one that doesn't scale well: Large social networks, for example, have a vast array of input fields that make them impractical to test by hand. Sanitation filters can also be pretty idiosyncratic, and in order to exhaust the large number of possibilities (different tags, attributes, encodings, etc) that exist, it's necessary to at least partially automate the process.
+
+I say *partially* because this isn't a scanner-type operation where you can enter a URL and let loose. Burp Intruder (which is available in the free version of the product) requires a little more tact. As a tool that requires more explicit enumeration of the payloads involved you could it even say it represents a more elegant tool, from a more sophisticated age...
+
+Back to Burp: Intruder allows you to automate the act of feeding different payloads into multiple, specificed inputs. You can even specify the manner in which the payloads are submitted. But first, a definition of Intruder from Portswigger's own site. There's some marketing fluff, but if you skip to the good stuff, you'll see:
+
+>A typical workflow using Burp Intruder is as follows:
+> 
+>* Identify an interesting or vulnerable request within any of the Burp Suite tools, and send this to Intruder.
+>* Mark the locations in the request where you want to insert payloads.
+>* Configure your attack payloads, using Intruder's highly configurable algorithms and preset lists, or your own custom list of payloads.
+>* Start the attack and review the detailed results, including all requests made and responses received.
+>* Analyze the results to achieve your chosen objective, using customizable filtering and sorting, or by defining your own rules for matching or extracting response data
+
+This is a pretty accurate roadmap for the subject of this tutorial. Burp Intruder is an excellent (and again, free) tool that should be in the arsenal of every pentester.
+
+### Installation
+
+The first step in using Burp Intruder is [downloading Burp Suite](http://portswigger.net/burp/download.html). Since Burp is a java app, it's compatible with any OS that can run java (so, all of them). After you've downloaded and started up Burp Suite, follow these [browser-specific instructions](http://portswigger.net/burp/help/suite_gettingstarted.html) on how to configure your browser to run through the Burp proxy.
+
+### Google Gruyere
+
+Before opening Burp (or after, if you turn the intercept tab to "off"), go to everybody's favorite neighborhood deliberately-vulnerable web app, [Google Gruyere](http://google-gruyere.appspot.com/).
+
+![Google Gruyere info](images/GG_about.png)
+
+If you've gone through the previous exercise, feel free to use the same app instance, although clearing it is fine too.
+
+Log in and you should see this page.
+
+![Google Gruyere login](images/GG_login.png)
+
+Click on the "New Snippet" link.
+
+![Google Gruyere new snippet](images/GG_newSnippet.png)
+
+Enter something that you'll be able to recognize in code &mdash; not "ref=" or something else willfully unsemantic. I've chosen `COOLSTUFF` because I routinely shout nonsense.
+
+![Google Gruyere Cool Stuff](images/GG_coolstuff.png)
+
+### Starting the Attack
+
+Now comes the fun part! Open up Burp and go through the necessary steps to configure your browser (or if you've already done all that and your Intercept tab is set to "off" turn it to "on").
+
+After you've turned the Intercept function of your Burp Proxy app on, go ahead and submit the "New Snippet" Form. It should hang...
+
+...and hang. The Burp Proxy has intercepted the request and won't forward that HTTP traffic until you tell it to. For now, switching back to the Burp window, you should see this in your proxy tab:
+
+![GG Burp Intercept](images/GG_intercept.png)
+
+Now select the action tab...
+
+![GG Burp Proxy Action](images/GG_action.png)
+
+And the "Send to Intruder" option. Navigate over to the Intruder tab and you should see something like this. The highlighted areas are fields where Burp will insert the payloads you specify later.
+
+![GG Burp Intruder](images/GG_intruderInitial.png)
+
+For now, go ahead and click the "clear" button on the right hand side of the window. Then add brackets so that they encapsulate `COOLSTUFF` like so. The "New Snippet" content field is the only input surface we're interested in testing:
+
+![GG Burp Intruder Select](images/GG_intruderSelect.png)
+
+Great! Now switch over to the "payloads" tab. Go to the second field option ("Payload Options [Simple List]"). And add [this](https://code.google.com/p/fuzzdb/source/browse/trunk/attack-payloads/xss/xss-rsnake.txt?r=186), a `.txt` file of common XSS payloads taken from rsnake (all credit and praise to him). Afterwards your screen should look like this. Go ahead and uncheck the box to encode your payload for HTTP submission.
+
+![GG Burp load payload](images/GG_loadPayload.png)
+
+One more step! Go to the Intruder tab at the tob of Burp and select the first option "start attack." You'll get some text about how the free version of Burp suite is throttled, etc, etc. Click 'yes.' The window that pops up will contain the results of your attack.
+
+### Interpreting the Results
+
+Something along these lines should pop up in your attack window.
+
+![GG Burp attack results](images/GG_attackResults.png)
+
+There are several ways we can interpret the results and discern XSS hits and misses.
+
+The first (and most direct) is noting the baseline request's time and how much, if at all, the times of subsequent payloads stray from it. The extended length of the request &mdash; in this instance almost three times the length of the baseline &mdash; definitely means those scripts are suspicious and worth confirming manually.
+
+Another clue that the requests coming in way past the baseline are suspect, albeit one peculiar to this application, is that one of the first submission's in rsnake's list is a plain `<script>` tag that happens to return a plain 'ol, saintly `540` as the request time, the same as the baseline &mdash; as we discovered in our [last post](http://bughunting.guide/a-gentle-introduction-to-cross-site-scripting-xss/).
+
+Another option is using XSS Validator, A Burp Suite extension available to both free and premium users that uses a Phantomjs server to send cross-site requests confirming legitimate vulnerabilities &mdash; and disproving false positives.
+
+
 ## CSRF
 
 CSRF stands for **C**ross **S**ite **R**equest **F**orgery, and there's a reason that it's second in our list of web application vulnerabilities. CSRF can exist both independently and, in particularly nasty versions, in conjunction with XSS.
