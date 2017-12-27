@@ -6,17 +6,17 @@ But it's not hard to *begin* that journey. And too often the two are confused.
 
 There's an unfortunate myth, promoted in part by the security industry, that it takes otherworldly technical ability to expose security flaws. That's simply not the case. It doesn't take prodigious logic, mathematical prowess, or unreal coding skills to get started in the world of penetration testing ("pentesting" from here on out). All it takes is time, determination, and &mdash; like every human pursuit &mdash; the smallest amount of luck.
 
-This book is a direct attempt to put the lie to that myth. With the tools, strategies, and skills outlined in this guide, you can expect to expose your first security flaws. This document will cover:
+This book is a direct attempt to put the lie to that myth. With the tools, strategies, and skills outlined here, you can expect to expose your first security flaws. This document will cover:
 
 * The free tools you can install on your computer, regardless of operating system, to expose vulnerabilities, in addition to specialized OSes designed for security research
 * An overview of the most common security flaws, where to find them, and how they work.
-* Attacks: Including their prevalence, theory, and easy-to-understand code examples you can use in the wild
+* Attacks -- their prevalence, theory, and easy-to-understand code examples you can use in the wild
 * The websites, communities, and resources you can use to find legal and profitable targets for your pentesting skills
 * How to submit bug reports that maximize your chances for getting paid the highest amount in a timely fashion
-* Where to go from here: A curated list of resources to continue your infosec education.
+* Where to go from here -- a curated list of resources to continue your infosec education.
 
-Web applications are both ubiquitous and growing in number. Social networks, ecommerce apps, cloud schedulers, productivity tools, and an endless parade of other dynamic applications have inserted themselves into nearly every facet of everyday life. With only further connectivity expected, both in the form of the IoT (Internet of Things), the expectation that "smart devices," running the gamut from wearable bracelets to networked refrigerators, will connect to cloud networks and draw upon a vast array of internet-connected services, and in the form of the [billions of people who will be connected to the internet in the next decade](http://www.wired.com/2015/01/the-new-space-race-internet/).
+Web applications are becoming increasingly complex as more users become connected and those users live more of their lives online. Social networks, online storefronts, cloud calendars, productivity tools, and an endless parade of other dynamic applications have inserted themselves into nearly every facet of everyday life. As the both the breadth and depth of virtual life increases -- Cisco's annual VNI forecast predicts 58% of the world will be on the internet in 2021 (up from 44% in 2016) and the average user will employ 3.5 networked devices (up from 2.3 in 2016) -- the demands on those web applications will increase.
 
-All those services and networked devices will control a large swathe of our lives. Their integrity will be paramount. And as the open source renaissance of the last twenty years has shown us, the best way forward in securing them lies in open, grassroots, and distributed efforts.
+Those services and networked devices will control a large swathe of our lives, making their integrity paramount. And as the open source renaissance of the last twenty years has shown us, the best strategy for securing them lies in open, distributed efforts to ferret out -- and fix -- their vulnerabilities.
 
-Consider this your introduction to productively supporting those efforts. Catching bugs before they can be exploited makes the Internet safer. This tutorial is your guide to getting started contributing to that safety.
+Consider this your introduction to productively supporting those efforts. Catching bugs before they can be exploited makes the internet safer. This tutorial is your guide to getting started contributing to that safety.

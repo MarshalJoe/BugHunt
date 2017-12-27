@@ -8,42 +8,44 @@ They are, in no particular order:
 * HTML
 * Javascript
 * JSON
-* SQL
+* SQL / NoSQL
 * Cookies
-* The Browser
+* The Client-Server Relationship
 
 Below are the listed subjects with one or two of what I consider to be the best resources for getting up to speed on them. If you don't feel these resources fit your learning style, want alternative options, or want more advanced (or paid) programs, consult the **Additional Resources** section.
 
 ## HTTP
 
-* [Tuts](http://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
-* [TutorialsPoint](http://www.tutorialspoint.com/http/)
+* [HTTP: The Protocol Every Web Developer Must Know -- Tuts](http://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177)
+* [HTTP Tutorial -- TutorialsPoint](http://www.tutorialspoint.com/http/)
 
 ## HTML
 
-* [Mozilla Developer Guide](https://developer.mozilla.org/en-US/Learn/HTML)
+* [HTML - Mozilla Developer Guide](https://developer.mozilla.org/en-US/Learn/HTML)
 
 ## Javascript
 
-* [Code Academy](http://www.codecademy.com/)
-* [Code School](http://www.codeschool.com)
+* [Javascript -- Code Academy](https://www.codecademy.com/catalog/language/javascript)
+* [Javascript -- Code School](https://www.codeschool.com/learn/javascript)
 
 ## JSON
 
-* [W3 Resource](http://www.w3resource.com/JSON/structures.php)
-* [Stackoverflow](http://stackoverflow.com/questions/1695883/what-is-json-can-you-explain-it-to-a-newbie)
+* [An Introduction to JSON -- Digital Ocean](https://www.digitalocean.com/community/tutorials/an-introduction-to-json)
+* [What is JSON? -- Stackoverflow](http://stackoverflow.com/questions/1695883/what-is-json-can-you-explain-it-to-a-newbie)
 
 ## SQL
 
-* [Learn SQL The Hard Way](http://sql.learncodethehardway.org/)
+* [Learn SQL The Hard Way -- Learn Code the Hard Way](http://sql.learncodethehardway.org/)
 
 ## Cookies
 
-* [Good 'ol Wikipedia](http://en.wikipedia.org/wiki/HTTP_cookie)
+* [HTTP Cookie -- Wikipedia](http://en.wikipedia.org/wiki/HTTP_cookie)
 
-## The Browser
+## The Client-Server Relationship
 
-* [Official Google Blog Post](http://googleblog.blogspot.com/2009/10/what-is-browser.html)
+* [Client-Server Model -- Wikipedia](https://en.wikipedia.org/wiki/Client%E2%80%93server_model)
 
-There's no defined threshold for how much of each of these subjects you need to understand in order to begin successfully pentesting. One option is to work through the **Attacks** section straight through and fill in the gaps as you go, but I'd suggest gaining at least some familiarity with the aforementioned subjects to make your life much easier.
+Some of these resources are general knowledge bases (Wikipedia), while some are more specialized (The Mozilla Developer Guide), but all are good, accessible entry points for the above topics.
+
+There's no defined threshold for how much of each of these subjects you need to understand in order to begin successfully pentesting. One option is to work through the **Attacks** section straight through and fill in the gaps as you go, but I'd suggest gaining at least some familiarity with these topics to make your life much easier.
 
